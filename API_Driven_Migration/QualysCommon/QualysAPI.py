@@ -154,6 +154,9 @@ class QualysAPI:
                 resp = self.sess.send(prepped_req, timeout=None)
             except UnicodeEncodeError:  # Problem encoding request data
                 print('API Error: UnicodeEncodeError exception caught, returning \'None\' to caller')
+                print("QualysAPI.makeCall: Request Headers")
+                print("%s" % str(rheaders))
+
                 return None
             except requests.exceptions.ConnectionError:
                 print('API Error: Connection Error, retrying connection')
@@ -163,6 +166,8 @@ class QualysAPI:
             except:  # Unhandled exception
                 print('API Error: Unhandled Exception :', sys.exc_info()[0])
                 print('Returning \'None\' to the caller')
+                print("QualysAPI.makeCall: Request Headers")
+                print("%s" % str(rheaders))
                 return None
 
         if self.debug:
