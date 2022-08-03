@@ -55,6 +55,9 @@ if __name__ == '__main__':
         for asset in asset_list:
             if args.d:
                 print('Asset being processed\n%s' % json.dumps(asset, indent='  '))
+            if 'agentInfo' not in asset['HostAsset'].keys():
+                print('Asset %s does not have any Agent Info, skipping' % asset['HostAsset']['name'])
+                continue
             if asset['HostAsset']['agentInfo']['platform'] == 'Windows':
                 win_f.write('%s,%s\n' % (asset['HostAsset']['agentInfo']['agentId'], asset['HostAsset']['name']))
                 print('%s,%s' % (asset['HostAsset']['agentInfo']['agentId'], asset['HostAsset']['name']))
