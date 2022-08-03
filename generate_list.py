@@ -53,6 +53,8 @@ if __name__ == '__main__':
     for key in args.k:
         asset_list = CloudAgentListGenerator.getAssets(api=api, key=key[0])
         for asset in asset_list:
+            if args.d:
+                print('Asset being processed\n%s' % json.dumps(asset, indent='  '))
             if asset['HostAsset']['agentInfo']['platform'] == 'Windows':
                 win_f.write('%s,%s\n' % (asset['HostAsset']['agentInfo']['agentId'], asset['HostAsset']['name']))
                 print('%s,%s' % (asset['HostAsset']['agentInfo']['agentId'], asset['HostAsset']['name']))
